@@ -96,7 +96,7 @@ export default {
             // https://codepen.io/csmccoy/pen/yLNBpyW?editors=1010
             return $("<textarea/>").html(text).text();
         }
-        await axios.get('/api/community/getPostAll', {params: {board_id: this.$route.params.board, limit: 0}})
+        await axios.get('/api/getPostAll', {params: {board_id: this.$route.params.board, limit: 0}})
         .then(res => {
             for(let i = 0; i < res.data.length; i++){
                 if(this.$route.params.id === res.data[i].nickname && this.$route.params.board == res.data[i].board_id && this.$route.params.post == res.data[i].post_id){
@@ -109,7 +109,7 @@ export default {
             }
         })
         .catch(err => console.log(err));
-        await axios.get('/api/community/showComments', {params: {post_id: this.$route.params.post}})
+        await axios.get('/api/showComments', {params: {post_id: this.$route.params.post}})
         .then(res => {
             console.log(res);
             for(let i = 0; i < res.data.length; i++){
@@ -136,7 +136,7 @@ export default {
             console.log(userInformation.nickname);
             // this.commentInput 값을 넣어주기. (유저아이디, 게시글 제목)
             // req.body.post_id, req.body.nickname, parent_comments_id, req.ip, req.body.content
-            axios.post('/api/community/comments', {
+            axios.post('/api/comments', {
                 post_id: this.$route.params.post,
                 nickname: userInformation.nickname,
                 content: this.commentInput,
@@ -156,7 +156,7 @@ export default {
             if(confirm('정말 게시글을 삭제하시겠습니까?')){
                 alert('삭제되었습니다!');
                 console.log(this.$route.params.post);
-                axios.delete('/api/community/deletePost', {params: {post_id: this.$route.params.post}})
+                axios.delete('/api/deletePost', {params: {post_id: this.$route.params.post}})
                 .catch(err => console.log(err))
                 location.replace('/community');
             }
@@ -167,7 +167,7 @@ export default {
             let inputSetCommentBox = document.querySelectorAll('.inputSetCommentBox');
             let inputSetComment = document.querySelectorAll('.inputSetComment');
             inputSetCommentBox[i].classList.add('event');
-            axios.get('/api/community/showComments', {params: {post_id: this.$route.params.post}})
+            axios.get('/api/showComments', {params: {post_id: this.$route.params.post}})
             .then(res => {
                 inputSetComment[i].innerHTML = res.data[i].content;
             })
@@ -179,7 +179,7 @@ export default {
             let post_id = this.$route.params.post;
             let inputSetComment = document.querySelectorAll('.inputSetComment');
             let userInformation = JSON.parse(localStorage.getItem("userInformation"));
-            axios.patch('/api/community/updateComment', {
+            axios.patch('/api/updateComment', {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -202,7 +202,7 @@ export default {
             let post_id = this.$route.params.post;
             console.log(post_id);
             if(confirm('댓글을 지우시겠습니까?')){
-                axios.delete('/api/community/deleteComment', {params: {
+                axios.delete('/api/deleteComment', {params: {
                     comments_id: this.comment.comments_id[i],
                     post_id: Number(post_id),
                 }}).then(res => console.log(res))

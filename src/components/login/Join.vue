@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="inner">
-                <form action="/api/login/join" method="post" class="login" target="iframe1"> 
+                <form action="/api/join" method="post" class="login" target="iframe1"> 
                     <p>회원가입</p>
                     <div>
                         <label for="input" class="labelName">이메일</label>
@@ -79,7 +79,7 @@ export default {
             }
         },
         idOverlap(){
-            axios.post('/api/login/checkid', {mail: this.idInput})
+            axios.post('/api/checkid', {mail: this.idInput})
             .then(res => {
                 console.log(res.data.checkid);
                 this.checkId = res.data.checkid; // true / false 유무
@@ -96,7 +96,7 @@ export default {
         nicknameOverlap(){
             let inputValue = document.querySelectorAll('.input');
             console.log(inputValue[7].value)
-            axios.post('/api/login/checkNickname', {nickname: inputValue[7].value})
+            axios.post('/api/checkNickname', {nickname: inputValue[7].value})
             .then(res => {
                 console.log(res);
                 this.checkNickname = res.data.checkNickname;

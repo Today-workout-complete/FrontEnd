@@ -114,7 +114,7 @@ export default {
             categoryValue: '전체',
             count: 1
         })
-        axios.get('/api/community/showAnotherBoard', )
+        axios.get('/api/showAnotherBoard', )
         // community 페이지에 돌아오거면 검색 창 빈칸으로 변경시켜주기.
         this.$store.dispatch('Search/searchAction', {
             inputRes: ''
@@ -143,7 +143,7 @@ export default {
         },
         categoryAdd(){
             // console.log('category추가 user는', this.$store.state.User.storeMail);
-            axios.post('/api/community/createBoard', {
+            axios.post('/api/createBoard', {
                 member_id: this.$store.state.User.storeMail, 
                 // 게시판 이름
                 board_name: this.categoryVal[0],

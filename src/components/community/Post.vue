@@ -89,7 +89,7 @@ export default {
             this.post.board_id = [];
             this.post.user_id = [];
             this.post.post_id = [];
-            axios.get('/api/community/searchtitle', {
+            axios.get('/api/searchtitle', {
                 params: {title: result}}, 
                 {withCredentials: true})
             .then(res => {
@@ -121,7 +121,7 @@ export default {
             let sort = document.querySelector('.sort');
             console.log(sort.value);
             if(sort.value === '오래된순'){
-                axios.get('/api/community/showPostAsc', {params: {board_id: 1, limit: 0}})
+                axios.get('/api/showPostAsc', {params: {board_id: 1, limit: 0}})
                 .then(res => {
                 this.post.title = []; this.post.id = []; this.post.img = []; this.post.date = [];
                 this.post.board_id = []; this.post_id = [];
@@ -150,7 +150,7 @@ export default {
             this.post_id = [];
             if(this.$route.name === 'MyPage'){
                 console.log('내가 올린 게시물');
-                axios.get('/api/community/myPagePost', {params: {nickname: userInformation.nickname, limit: 0}})
+                axios.get('/api/myPagePost', {params: {nickname: userInformation.nickname, limit: 0}})
                 .then(res => {
                     for(let i = 0; i < res.data.length; i++){
                         console.log(res);
@@ -165,7 +165,7 @@ export default {
                 }).catch(err => console.log(err));
             }else{
                 console.log('커뮤니티');
-                axios.get('/api/community/showPostDesc',{params: {board_id: 1, limit: 0}})
+                axios.get('/api/showPostDesc',{params: {board_id: 1, limit: 0}})
                 .then(res => {
                     console.log(res);
                     this.postCount = res.data.length;
@@ -185,7 +185,7 @@ export default {
         changePost(boardID){
             this.post.title = []; this.post.id = []; this.post.img = [];
             this.post.date = []; this.post.board_id = []; this.post.post_id = []; this.post_id = [];
-            axios.get('/api/community/showAnotherBoard', {params: {board_id: boardID}})
+            axios.get('/api/showAnotherBoard', {params: {board_id: boardID}})
             .then(res => {
             for(let i = 0; i < res.data.length; i++){
                 console.log(res.data[i].post_id);
@@ -212,7 +212,7 @@ export default {
             if(this.$route.name === 'MyPage'){
                 console.log('내가 올린 게시물');
                 console.log(this.post.count);
-                axios.get('/api/community/myPagePost', {params: {nickname: userInformation.nickname, limit: this.post.count}})
+                axios.get('/api/myPagePost', {params: {nickname: userInformation.nickname, limit: this.post.count}})
                 .then(res => {
                     for(let i = 0; i < 9; i++){
                         this.post.post_id.push(res.data[i].post_id);
@@ -229,7 +229,7 @@ export default {
                 });
             }else{
                 console.log(this.post.count);
-                axios.get('/api/community/showPostDesc', {params: {board_id: 1, limit: this.post.count}})
+                axios.get('/api/showPostDesc', {params: {board_id: 1, limit: this.post.count}})
                 .then(res => {
                     console.log(res);
                     for(let i = 0; i < 9; i++){
