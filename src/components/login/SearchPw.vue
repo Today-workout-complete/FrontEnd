@@ -40,7 +40,7 @@ export default {
             console.log(input[0].value);
             console.log(input[1].value);
             console.log(input[2].value);
-            axios.get('/api/findPassword', {
+            axios.get('/api/login/findPassword', {
                 params: {
                     mail: input[0].value,
                     uesr_name: input[1].value,

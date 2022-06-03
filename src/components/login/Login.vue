@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="inner">
-                <!-- <form action="/api/login" method="post" class="login">  -->
+                <!-- <form action="/api/login/login" method="post" class="login">  -->
                 <div class="login">
                     <p>로그인</p>
                     <div>
@@ -44,7 +44,7 @@ export default {
     methods: {
         login(){
             // /api/login으로 값을 아이디, 비밀번호를 보냄 -> 백엔드는 DB에서 아이디, 비밀번호가 일치한게 있으면 가져와서 보내줌.(토큰) => 둥일한게 없으면 boolean 값이 false인 것을 넣어줌.
-            axios.post('/api/login', {mail: this.logins.mail, password: this.logins.password})
+            axios.post('/api/login/login', {mail: this.logins.mail, password: this.logins.password})
             .then(res => {
                 console.log(res);
                 // console.log('토큰 값 : ', res.data.token);

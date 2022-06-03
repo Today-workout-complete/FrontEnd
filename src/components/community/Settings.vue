@@ -86,7 +86,7 @@ export default {
         passwordCheckBtn[0].addEventListener('click', function(){
             console.log(passwordInput[0].value)
 
-            axios.post("/api/checkPassword", {password: passwordInput[0].value, mail: userInformation.mail})
+            axios.post("/api/myPage/checkPassword", {password: passwordInput[0].value, mail: userInformation.mail})
             .then(res => {
                 console.log(res.data.checkid);
 
@@ -102,7 +102,7 @@ export default {
         passwordCheckBtn[2].addEventListener('click', function(){
             if(passwordInput[1].value === passwordInput[2].value && state === true){
                 alert('수정되었습니다! 재 로그인 해주세요.');
-                axios.patch('/api/updatePassword', {password: passwordInput[2].value, mail: userInformation.mail})
+                axios.patch('/api/myPage/updatePassword', {password: passwordInput[2].value, mail: userInformation.mail})
                 .then(res => {
                     localStorage.removeItem('userInformation');
                     // 쿠키를 전 시간으로 돌려서 로그아웃 시켜줌.
@@ -149,7 +149,7 @@ export default {
             frm.append('introduction', this.set.intro[1]);
             console.log(this.changeImg);
 
-            axios.patch('/api/updateMyInfo', frm, {
+            axios.patch('/api/myPage/updateMyInfo', frm, {
                 headers: {'Content-Type': 'multipart/form-data'}
             }).then(res => {
                 console.log('성공!', res)
@@ -168,7 +168,7 @@ export default {
                 // 확인 버튼 클릭 시 동작
                 alert("탈퇴되었습니다.");
                 alert(userInformation.mail);
-                axios.delete('/api/deleteUserInfo', {params: {mail: userInformation.mail}})
+                axios.delete('/api/myPage/deleteUserInfo', {params: {mail: userInformation.mail}})
                 .then(res => {
                     console.log(res)
                     localStorage.removeItem('userInformation');
