@@ -67,7 +67,7 @@ export default {
             let title = document.querySelector('.title');
             this.btn.btnName[1] = '수정하기';
             // url의 id, post, board 부분의 동일한 값을 DB에서 가져와서 넣어줌.
-            axios.get('/api/getPostAll', {params: {
+            axios.get('/api/community/getPostAll', {params: {
                 // nickname: this.$route.params.id,
                 // post_id: this.$route.params.post,
                 limit: 0,
@@ -176,7 +176,7 @@ export default {
                 frm.append('post_id', parseInt(route.post_id));
                 frm.append('comment', comment);
                 // frm.append('board_id', this.$route.params.board);
-                axios.patch('/api/updatePost', frm, {
+                axios.patch('/api/community/updatePost', frm, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -190,7 +190,7 @@ export default {
                 console.log('0번째 글');
                 frm.append('nickname', nickName);
                 frm.append('content', comment);
-                axios.post('/api/createPost', frm, {
+                axios.post('/api/community/createPost', frm, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

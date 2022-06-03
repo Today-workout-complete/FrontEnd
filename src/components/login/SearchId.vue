@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="inner">
-                <!-- <form action="/api/findId" method="post" class="login">  -->
+                <!-- <form action="/api/login/findId" method="post" class="login">  -->
                 <div class="login">
                     <p>아이디 찾기</p>
                     <div class="inputBox" v-for="value, i in value" :key="i">
@@ -42,7 +42,7 @@ export default {
             const input = document.querySelectorAll('.input');
             console.log(input[0].value);
             console.log(input[1].value);
-            axios.get('/api/findId', {
+            axios.get('/api/login/findId', {
                 params: {
                     uesr_name: input[0].value,
                     phonenumber: input[1].value
